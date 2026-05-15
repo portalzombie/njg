@@ -1,224 +1,178 @@
-```react
-import React, { useState } from 'react';
-import { 
-  Home, 
-  User, 
-  FileText, 
-  BookOpen, 
-  Phone, 
-  Menu, 
-  X, 
-  ChevronRight, 
-  Download,
-  ShieldCheck,
-  Activity,
-  HardHat
-} from 'lucide-react';
 
-const App = () => {
-  const [activeTab, setActiveTab] = useState('home');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보건관리자 포트폴리오</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap');
+        body { font-family: 'Pretendard', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .bottom-nav-active { color: #2563eb; }
+        .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 pb-20">
 
-  // Sample Data
-  const projects = [
-    { id: 1, title: 'OO 메트로 3공구', period: '2023 - 현재', role: '보건선임' },
-    { id: 2, title: 'XX 테크노밸리', period: '2021 - 2023', role: '보건관리' }
-  ];
-
-  const resources = [
-    { id: 1, title: '夏季 온열질환 예방 가이드', type: 'PDF' },
-    { id: 2, title: 'TBM 보건교육 일지 양식', type: 'XLSX' },
-    { id: 3, title: 'MSDS 관리 대장(샘플)', type: 'DOCX' }
-  ];
-
-  const NavItem = ({ id, icon: Icon, label }) => (
-    <button 
-      onClick={() => setActiveTab(id)}
-      className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${
-        activeTab === id ? 'text-blue-600' : 'text-gray-500'
-      }`}
-    >
-      <Icon size={20} />
-      <span className="text-[10px] font-medium">{label}</span>
-    </button>
-  );
-
-  return (
-    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900 font-sans pb-16">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b px-4 py-3 flex justify-between items-center shadow-sm">
-        <div className="flex items-center space-x-2">
-          <div className="bg-blue-600 p-1.5 rounded-lg">
-            <ShieldCheck className="text-white" size={20} />
-          </div>
-          <span className="font-bold text-lg tracking-tight">HealthGuard Admin</span>
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b px-4 py-3 flex justify-between items-center shadow-sm">
+        <div class="flex items-center space-x-2">
+            <div class="bg-blue-600 p-1.5 rounded-lg text-white">
+                <i class="fas fa-shield-halved"></i>
+            </div>
+            <span class="font-bold text-lg tracking-tight">HealthGuard Admin</span>
         </div>
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-1">
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        <button class="p-2 text-gray-600">
+            <i class="fas fa-bars text-xl"></i>
         </button>
-      </header>
+    </header>
 
-      {/* Mobile Sidebar Menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)}>
-          <div className="absolute top-0 right-0 h-full w-64 bg-white shadow-xl p-6 flex flex-col space-y-6" onClick={e => e.stopPropagation()}>
-            <div className="pt-10 space-y-4">
-              <a href="#" className="block text-lg font-medium">내 프로필</a>
-              <a href="#" className="block text-lg font-medium">관리 현장</a>
-              <a href="#" className="block text-lg font-medium">기술 자료실</a>
-              <a href="#" className="block text-lg font-medium">비상연락망</a>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
-        {activeTab === 'home' && (
-          <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
-            {/* Hero Section */}
-            <section className="bg-gradient-to-br from-blue-700 to-indigo-800 text-white px-6 py-10 rounded-b-[2.5rem] shadow-lg">
-              <h1 className="text-2xl font-bold mb-2">안녕하세요,<br />보건관리자 김안전입니다.</h1>
-              <p className="text-blue-100 text-sm mb-6 leading-relaxed">
-                근로자의 건강이 곧 현장의 안전입니다.<br />체계적인 데이터 관리로 무재해 현장을 만듭니다.
-              </p>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 text-center border border-white/20">
-                  <span className="block text-xl font-bold">5+</span>
-                  <span className="text-[10px] text-blue-100 uppercase tracking-wider">경력(년)</span>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 text-center border border-white/20">
-                  <span className="block text-xl font-bold">12</span>
-                  <span className="text-[10px] text-blue-100 uppercase tracking-wider">자격증</span>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 text-center border border-white/20">
-                  <span className="block text-xl font-bold">8</span>
-                  <span className="text-[10px] text-blue-100 uppercase tracking-wider">완료현장</span>
-                </div>
-              </div>
-            </section>
-
-            {/* Quick Actions */}
-            <section className="px-5 -mt-6">
-              <div className="bg-white rounded-2xl shadow-md p-4 flex justify-between items-center border border-gray-100">
-                <div className="flex items-center space-x-3">
-                  <div className="bg-orange-100 p-2 rounded-full">
-                    <Activity className="text-orange-600" size={20} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-500 font-medium">오늘의 현장 컨디션</p>
-                    <p className="text-sm font-bold text-gray-800 underline decoration-orange-300">폭염 주의보 발령</p>
-                  </div>
-                </div>
-                <button className="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg text-xs font-bold">
-                  대응 지침 보기
-                </button>
-              </div>
-            </section>
-
-            {/* Current Projects Card */}
-            <section className="px-5 mt-8">
-              <div className="flex justify-between items-end mb-4">
-                <h2 className="text-lg font-bold flex items-center">
-                  <HardHat className="mr-2 text-blue-600" size={18} />
-                  관리 현장
-                </h2>
-                <button className="text-xs text-blue-600 font-semibold">전체보기</button>
-              </div>
-              <div className="space-y-3">
-                {projects.map(project => (
-                  <div key={project.id} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center group active:scale-[0.98] transition-transform">
-                    <div>
-                      <h3 className="font-bold text-gray-800">{project.title}</h3>
-                      <p className="text-xs text-gray-500 mt-1">{project.period} | {project.role}</p>
-                    </div>
-                    <ChevronRight size={18} className="text-gray-300 group-hover:text-blue-500" />
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Latest Resources */}
-            <section className="px-5 mt-8 mb-8">
-              <div className="flex justify-between items-end mb-4">
-                <h2 className="text-lg font-bold flex items-center">
-                  <BookOpen className="mr-2 text-blue-600" size={18} />
-                  업무 자료실
-                </h2>
-                <button className="text-xs text-blue-600 font-semibold">더보기</button>
-              </div>
-              <div className="grid grid-cols-1 gap-3">
-                {resources.map(file => (
-                  <div key={file.id} className="bg-white p-4 rounded-xl border border-gray-100 flex items-center space-x-4 shadow-sm active:bg-gray-50">
-                    <div className="bg-gray-100 p-2.5 rounded-lg text-gray-600">
-                      <FileText size={20} />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-800">{file.title}</p>
-                      <span className="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter">{file.type}</span>
-                    </div>
-                    <button className="p-2 text-gray-400">
-                      <Download size={18} />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </div>
-        )}
-
-        {activeTab === 'profile' && (
-          <div className="p-6 animate-in fade-in duration-300">
-            <h2 className="text-xl font-bold mb-6">보건관리 전문가 프로필</h2>
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6 text-center">
-              <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden border-4 border-blue-50">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Profile" className="w-full h-full object-cover" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-800">김안전</h3>
-              <p className="text-sm text-blue-600 font-medium">산업위생관리기사 / 인간공학기사</p>
-              <div className="mt-6 flex flex-wrap gap-2 justify-center">
-                <span className="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium text-gray-600">MSDS 관리</span>
-                <span className="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium text-gray-600">위험성평가</span>
-                <span className="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium text-gray-600">KOSHA-MS</span>
-                <span className="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium text-gray-600">간호사 면허</span>
-              </div>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                <h4 className="font-bold text-sm text-gray-800 mb-2 underline decoration-blue-200 underline-offset-4">주요 이력</h4>
-                <p className="text-xs text-gray-600 leading-relaxed italic">
-                  "현장 맞춤형 보건 교육 프로그램을 직접 기획하여, 2년 연속 전사 최우수 보건관리자로 선정되었습니다."
+    <!-- Main Content Area -->
+    <div id="content">
+        <!-- Home Section (Default) -->
+        <div id="home-section" class="animate-in fade-in duration-500">
+            <!-- Hero Section -->
+            <section class="bg-gradient-to-br from-blue-700 to-indigo-800 text-white px-6 py-10 rounded-b-[2.5rem] shadow-lg">
+                <h1 class="text-2xl font-bold mb-2 leading-snug">안녕하세요,<br>보건관리자 <span class="text-blue-200">김안전</span>입니다.</h1>
+                <p class="text-blue-100 text-sm mb-6 leading-relaxed opacity-90">
+                    근로자의 건강이 곧 현장의 안전입니다.<br>체계적인 데이터 관리로 무재해 현장을 만듭니다.
                 </p>
-              </div>
-            </div>
-          </div>
-        )}
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 text-center border border-white/20">
+                        <span class="block text-xl font-bold">5+</span>
+                        <span class="text-[10px] text-blue-100 uppercase font-medium">경력(년)</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 text-center border border-white/20">
+                        <span class="block text-xl font-bold">12</span>
+                        <span class="text-[10px] text-blue-100 uppercase font-medium">자격증</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 text-center border border-white/20">
+                        <span class="block text-xl font-bold">8</span>
+                        <span class="text-[10px] text-blue-100 uppercase font-medium">완료현장</span>
+                    </div>
+                </div>
+            </section>
 
-        {/* Placeholder for other tabs */}
-        {['files', 'education', 'contact'].includes(activeTab) && (
-          <div className="flex flex-col items-center justify-center h-[60vh] p-6 text-center">
-            <div className="bg-gray-100 p-6 rounded-full mb-4">
-              <FileText size={48} className="text-gray-300" />
-            </div>
-            <h3 className="text-lg font-bold text-gray-800 uppercase tracking-tight">{activeTab} 페이지</h3>
-            <p className="text-sm text-gray-500 mt-2 italic">콘텐츠를 준비 중입니다.</p>
-          </div>
-        )}
-      </main>
+            <!-- Quick Action Card -->
+            <section class="px-5 -mt-6">
+                <div class="bg-white rounded-2xl shadow-md p-4 flex justify-between items-center border border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-orange-100 p-2.5 rounded-full text-orange-600">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-gray-500 font-bold uppercase tracking-tighter">오늘의 현장 컨디션</p>
+                            <p class="text-sm font-bold text-gray-800">폭염 주의보 발령</p>
+                        </div>
+                    </div>
+                    <button class="bg-blue-50 text-blue-600 px-3 py-2 rounded-lg text-xs font-bold active:bg-blue-100 transition-colors">
+                        대응 지침
+                    </button>
+                </div>
+            </section>
 
-      {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 w-full h-16 bg-white/80 backdrop-blur-lg border-t flex items-center justify-around px-2 pb-safe shadow-[0_-1px_10px_rgba(0,0,0,0.05)]">
-        <NavItem id="home" icon={Home} label="홈" />
-        <NavItem id="files" icon={FileText} label="관리현장" />
-        <NavItem id="education" icon={BookOpen} label="자료실" />
-        <NavItem id="profile" icon={User} label="프로필" />
-        <NavItem id="contact" icon={Phone} label="비상연락" />
-      </nav>
+            <!-- Projects -->
+            <section class="px-5 mt-8">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-lg font-bold flex items-center">
+                        <i class="fas fa-hard-hat mr-2 text-blue-600"></i>관리 현장
+                    </h2>
+                    <span class="text-xs text-blue-600 font-semibold cursor-pointer">전체보기</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-[0.98] transition-transform">
+                        <div>
+                            <h3 class="font-bold text-gray-800">OO 메트로 3공구 건설현장</h3>
+                            <p class="text-xs text-gray-500 mt-1">2023 - 현재 | 보건선임 관리자</p>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-300"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-[0.98] transition-transform">
+                        <div>
+                            <h3 class="font-bold text-gray-800">XX 테크노밸리 조성공사</h3>
+                            <p class="text-xs text-gray-500 mt-1">2021 - 2023 | 보건관리 담당</p>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-300"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources -->
+            <section class="px-5 mt-8 mb-8">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-lg font-bold flex items-center">
+                        <i class="fas fa-folder-open mr-2 text-blue-600"></i>업무 자료실
+                    </h2>
+                    <span class="text-xs text-blue-600 font-semibold cursor-pointer">더보기</span>
+                </div>
+                <div class="grid grid-cols-1 gap-3">
+                    <div class="bg-white p-4 rounded-xl border border-gray-100 flex items-center space-x-4 shadow-sm active:bg-gray-50 transition-colors">
+                        <div class="bg-red-50 p-3 rounded-lg text-red-500">
+                            <i class="fas fa-file-pdf text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold text-gray-800 tracking-tight">夏季 온열질환 예방 가이드</p>
+                            <span class="text-[10px] text-gray-400 font-bold uppercase">PDF | 2.4MB</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-blue-600 p-2">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-gray-100 flex items-center space-x-4 shadow-sm active:bg-gray-50 transition-colors">
+                        <div class="bg-green-50 p-3 rounded-lg text-green-600">
+                            <i class="fas fa-file-excel text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold text-gray-800 tracking-tight">TBM 보건교육 일지 양식</p>
+                            <span class="text-[10px] text-gray-400 font-bold uppercase">XLSX | 1.1MB</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-blue-600 p-2">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
-  );
-};
 
-export default App;
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 w-full h-16 bg-white/90 backdrop-blur-lg border-t flex items-center justify-around px-2 safe-area-bottom shadow-[0_-1px_10px_rgba(0,0,0,0.05)]">
+        <button onclick="showSection('home')" class="nav-btn flex flex-col items-center justify-center w-full h-full space-y-1 bottom-nav-active">
+            <i class="fas fa-home text-lg"></i>
+            <span class="text-[10px] font-bold uppercase">홈</span>
+        </button>
+        <button onclick="showSection('projects')" class="nav-btn flex flex-col items-center justify-center w-full h-full space-y-1 text-gray-400">
+            <i class="fas fa-building text-lg"></i>
+            <span class="text-[10px] font-bold uppercase">현장</span>
+        </button>
+        <button onclick="showSection('files')" class="nav-btn flex flex-col items-center justify-center w-full h-full space-y-1 text-gray-400">
+            <i class="fas fa-file-invoice text-lg"></i>
+            <span class="text-[10px] font-bold uppercase">자료</span>
+        </button>
+        <button onclick="showSection('profile')" class="nav-btn flex flex-col items-center justify-center w-full h-full space-y-1 text-gray-400">
+            <i class="fas fa-user-tie text-lg"></i>
+            <span class="text-[10px] font-bold uppercase">정보</span>
+        </button>
+    </nav>
 
-```
+    <script>
+        function showSection(id) {
+            // 버튼 스타일 초기화
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bottom-nav-active');
+                btn.classList.add('text-gray-400');
+            });
+            // 클릭된 버튼 활성화
+            event.currentTarget.classList.add('bottom-nav-active');
+            event.currentTarget.classList.remove('text-gray-400');
+
+            // 실제로는 여기에 섹션 전환 로직이 들어갑니다.
+            // 현재는 시각적 효과만 구현되어 있습니다.
+            console.log(id + " 섹션으로 이동");
+        }
+    </script>
+</body>
+</html>
+
